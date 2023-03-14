@@ -38,6 +38,7 @@ class SQLConnection:
         cnxn = self.get_conn_odbc()
         try:
             cursor = cnxn.cursor()
+            cursor.fast_executemany = True
             cursor.executemany(query, params)
             cnxn.commit()
         except Exception as e:
@@ -49,7 +50,7 @@ class SQLConnection:
 
     def execute_ddl_dml(self, query):
         cnxn = self.get_conn_odbc()
-        try:
+        try: 
             cursor = cnxn.cursor()
             cursor.execute(query)
             cnxn.commit()
