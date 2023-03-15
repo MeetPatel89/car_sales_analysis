@@ -1,4 +1,5 @@
 import pyodbc
+from sqlalchemy.engine import create_engine, URL
 
 class SQLConnection:
     def __init__(self, driver, server, db, user, pwd):
@@ -10,6 +11,12 @@ class SQLConnection:
 
     def get_conn_string(self):
         return f"Driver={self.driver};Server={self.server};Database={self.db};Authentication=SqlPassword;Encrypt=yes;TrustServerCertificate=Yes;UID={self.user};PWD={self.pwd}"
+    
+    def get_sql_engine(self):
+        conn_string = self.get_conn_string()
+        conn_url = URL.create("mssql+pyodbc", query={"odbc_connect": conn_string})
+        engine = create_engine(conn_url)
+        return engine
     
     def get_conn_odbc(self):
         try:
