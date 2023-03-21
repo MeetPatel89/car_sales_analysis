@@ -2,13 +2,15 @@
 	@x nvarchar(128),
 	@y nvarchar(128),
 	@tablename nvarchar(128),
-	@outvar decimal(9, 6)
+	@outvar decimal(9, 6) = null output
  )
  as
  begin
-	
+
+	set nocount on 
+
 	if object_id('temp_corr_temp') is not null
-		drop table temp_corr;
+		drop table temp_corr_temp;
 
 	declare @sqlquery1 nvarchar(max),
 			@sqlquery2 nvarchar(max),
@@ -24,6 +26,8 @@
 	set @param_def = N'@outvar decimal(9, 6)'
 
 	exec sp_executesql @sqlquery2, @param_def, @outvar = @outvar
+	
+	drop table temp_corr_temp;
 	
 	return @outvar
 

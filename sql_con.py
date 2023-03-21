@@ -55,6 +55,21 @@ class SQLConnection:
             cursor.close()
             cnxn.close()
 
+    def exec_proc(self, query, params):
+        cnxn = self.get_conn_odbc()
+        try:
+            cursor = cnxn.cursor()
+            cursor.execute(query, params)
+            rows = cursor.fetchone()[0]
+            cnxn.commit()
+            return rows
+        except Exception as e:
+            cnxn.rollback()
+            print(e.args[1])
+        finally:
+            cursor.close()
+            cnxn.close()
+
     def execute_ddl_dml(self, query):
         cnxn = self.get_conn_odbc()
         try: 
