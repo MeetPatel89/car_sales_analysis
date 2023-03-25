@@ -1,3 +1,6 @@
+go
+create or alter view corr_vars 
+as
 -- get relevant variables to compute correlation matrix for
 with corr_variables as (
 select 
@@ -8,17 +11,14 @@ datediff (
 	day, 
 	sale_date at time zone 'UTC', 
 	getdate() at time zone 'Eastern Standard Time' at time zone 'UTC'
-	)) [car_age (days)], 
+	)) car_age_days, 
 	condition, odometer, mmr, selling_price
 from car_sales),
 corr_variables_nonull as (
 select * from corr_variables
 where condition is not null 
-and [car_age (days)] is not null
+and car_age_days is not null
 )
-select * from corr_variables_nonull
--- select 
--- (sum([car_age (days)]*condition) - (sum([car_age (days)])*sum(condition))/count(*)) / (sqrt(sum([car_age (days)]*[car_age (days)]) - (sum([car_age (days)])*sum([car_age (days)]))/count(*))*sqrt(sum(condition*condition) - (sum(condition)*sum(condition))/count(*)))
--- as corr_car
--- from corr_variables_nonull
+select *
+from corr_variables_nonull
 go
