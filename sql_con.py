@@ -60,7 +60,7 @@ class SQLConnection:
         try:
             cursor = cnxn.cursor()
             cursor.execute(query, params)
-            rows = cursor.fetchone()[0]
+            rows = cursor.fetchall()
             cnxn.commit()
             return rows
         except Exception as e:

@@ -4,3 +4,4 @@ exec car_sales.dbo.get_corr_coeff
 		@y = ?, 
 		@tablename = ?,
 		@outvar = @out_param output
+select (@out_param) as corr_coeff
