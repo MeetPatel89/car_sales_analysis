@@ -55,6 +55,19 @@ class SQLConnection:
             cursor.close()
             cnxn.close()
 
+    def exec_proc_no_output(self, query, params):
+        cnxn = self.get_conn_odbc()
+        try:
+            cursor = cnxn.cursor()
+            cursor.execute(query, params)
+            cnxn.commit()
+        except Exception as e:
+            cnxn.rollback()
+            print(e.args[1])
+        finally:
+            cursor.close()
+            cnxn.close()
+
     def exec_proc(self, query, params):
         cnxn = self.get_conn_odbc()
         try:
