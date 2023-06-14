@@ -15,5 +15,16 @@
     - Numpy
     - Matplotlib
     - Seaborn
-    - SQL Server (Data Definition Transformations)
-    
+    - SQL Server (Data Definitions and Transformations)
+
+#### Replication Steps (Needs SQL Server on your Local Machine)
+
+- Clone the repository
+- Create .env file under root directory with the following key-value pairs
+    - SQL_SERVER=YOUR_SERVER_NAME
+    - SQL_DB=YOUR_DATABASE_NAME
+    - SQL_USER=YOUR_USERNAME
+    - SQL_PWD=YOUR_PASSWORD
+- Run notebook.ipynb in Jupyter Notebook
+- Data definition and transformation scripts are under /sql folder as follows:
+![Alt text](/images/queries.png "SQL Scripts")
