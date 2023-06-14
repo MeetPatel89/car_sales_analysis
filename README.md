@@ -25,6 +25,13 @@
     - SQL_DB=YOUR_DATABASE_NAME
     - SQL_USER=YOUR_USERNAME
     - SQL_PWD=YOUR_PASSWORD
+- Create a virtual environment and activate it
+- Install dependencies
+    - pandas
+    - numpy
+    - matplotlib
+    - seaborn
+    - pyodbc
 - Run notebook.ipynb in Jupyter Notebook
 - Data definition and transformation scripts are under /sql folder as follows:
 ![Alt text](/images/queries.png "SQL Scripts")
